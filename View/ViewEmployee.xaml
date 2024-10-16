@@ -5,39 +5,59 @@
              Title="ViewEmployee"
              BackgroundColor="#e0f7e6">
     <!-- Light green background -->
-    <VerticalStackLayout BackgroundColor="#c8e6c9">
+    <VerticalStackLayout BackgroundColor="#c8e6c9" Padding="10">
         <!-- Slightly darker green -->
         <Label 
             Text="Personal Information"
-            FontSize="20"
+            FontSize="24"
             HorizontalOptions="Center"
-            TextColor="#2e7d32"/>
-        <!-- Dark green text color -->
+            TextColor="#2e7d32"
+            FontAttributes="Bold"/>
 
-        <ListView ItemsSource="{Binding EmployeeList}">
+        <ListView ItemsSource="{Binding EmployeeList}" 
+                  BackgroundColor="Transparent" 
+                  SeparatorColor="#a5d6a7"
+                  HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding EmployeeID}" TextColor="#1b5e20"/>
-                        <Label Text="{Binding Name}" TextColor="#1b5e20"/>
-                        <Label Text="{Binding Address}" TextColor="#1b5e20"/>
-                        <Label Text="{Binding email}" TextColor="#1b5e20"/>
-                        <Label Text="{Binding ContactNo}" TextColor="#1b5e20"/>
-                    </StackLayout>
+                    <ViewCell>
+                        <StackLayout Padding="10" BackgroundColor="White" Margin="0,5">
+                            <Label Text="{Binding Name}" 
+                                   TextColor="#1b5e20" 
+                                   FontAttributes="Bold" 
+                                   FontSize="18"/>
+                            <Label Text="{Binding Address}" TextColor="#4a4a4a"/>
+                            <Label Text="{Binding email}" TextColor="#4a4a4a"/>
+                            <Label Text="{Binding ContactNo}" TextColor="#4a4a4a"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                <Button Text="Edit" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}" 
+                                        CommandParameter="{Binding .}" 
+                                        BackgroundColor="#4caf50" 
+                                        TextColor="White" 
+                                        WidthRequest="80" />
+                                <Button Text="Delete" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}" 
+                                        CommandParameter="{Binding .}" 
+                                        BackgroundColor="#e57373" 
+                                        TextColor="White" 
+                                        WidthRequest="80" 
+                                        Margin="10,0,0,0" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <Button Text="Load Data" Command="{Binding LoadDataCommand}" 
-                BackgroundColor="#4caf50" TextColor="White"/>
-        <!-- Green button -->
+                BackgroundColor="#4caf50" TextColor="White" />
 
         <Label x:Name="ConnectionStatusLabel" 
                Text="{Binding StatusMessage}"
                FontSize="18"
                HorizontalOptions="Center"
-               TextColor="#2e7d32"/>
-        <!-- Dark green text color -->
-
+               TextColor="#2e7d32" />
     </VerticalStackLayout>
 </ContentPage>
