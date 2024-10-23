@@ -21,14 +21,14 @@ namespace Mod7Exer1
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    ConnectionStatuslLabel.Text = "Connection Successful!";
-                    ConnectionStatuslLabel.TextColor = Colors.Green;
+                    ConnectionStatusLabel.Text = "Connection Successful!";
+                    ConnectionStatusLabel.TextColor = Colors.Green;
                 }
             }
             catch (Exception ex)
             {
-                ConnectionStatuslLabel.Text = $"Connection Failed: {ex.Message}";
-                ConnectionStatuslLabel.TextColor = Colors.Red;
+                ConnectionStatusLabel.Text = $"Connection Failed: {ex.Message}";
+                ConnectionStatusLabel.TextColor = Colors.Red;
             }
         }
 

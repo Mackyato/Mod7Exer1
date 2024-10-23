@@ -2,62 +2,84 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mod7Exer1.View.ViewEmployee"
-             Title="ViewEmployee"
-             BackgroundColor="#e0f7e6">
-    <!-- Light green background -->
-    <VerticalStackLayout BackgroundColor="#c8e6c9" Padding="10">
-        <!-- Slightly darker green -->
-        <Label 
-            Text="Personal Information"
-            FontSize="24"
-            HorizontalOptions="Center"
-            TextColor="#2e7d32"
-            FontAttributes="Bold"/>
+             Title="ViewEmployee">
 
-        <ListView ItemsSource="{Binding EmployeeList}" 
-                  BackgroundColor="Transparent" 
-                  SeparatorColor="#a5d6a7"
-                  HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10" BackgroundColor="White" Margin="0,5">
-                            <Label Text="{Binding Name}" 
-                                   TextColor="#1b5e20" 
-                                   FontAttributes="Bold" 
-                                   FontSize="18"/>
-                            <Label Text="{Binding Address}" TextColor="#4a4a4a"/>
-                            <Label Text="{Binding email}" TextColor="#4a4a4a"/>
-                            <Label Text="{Binding ContactNo}" TextColor="#4a4a4a"/>
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#ffccbc" Offset="0.0" /> <!-- Light Coral -->
+            <GradientStop Color="#d1c4e9" Offset="1.0" /> <!-- Light Purple -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                                <Button Text="Edit" 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}" 
-                                        CommandParameter="{Binding .}" 
-                                        BackgroundColor="#4caf50" 
-                                        TextColor="White" 
-                                        WidthRequest="80" />
-                                <Button Text="Delete" 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}" 
-                                        CommandParameter="{Binding .}" 
-                                        BackgroundColor="#e57373" 
-                                        TextColor="White" 
-                                        WidthRequest="80" 
-                                        Margin="10,0,0,0" />
+    <Grid>
+        <!-- Gradient Background -->
+        <BoxView>
+            <BoxView.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#ffccbc" Offset="0.0" />
+                    <GradientStop Color="#d1c4e9" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <VerticalStackLayout Padding="10">
+            <Label 
+                Text="Personal Information"
+                FontSize="24"
+                HorizontalOptions="Center"
+                TextColor="#2e7d32"
+                FontAttributes="Bold"/>
+
+            <ListView ItemsSource="{Binding EmployeeList}" 
+                      BackgroundColor="Transparent" 
+                      SeparatorColor="#a5d6a7"
+                      HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" BackgroundColor="White" Margin="0,5">
+                                <Label Text="{Binding Name}" 
+                                       TextColor="#1b5e20" 
+                                       FontAttributes="Bold" 
+                                       FontSize="18"/>
+                                <Label Text="{Binding Address}" TextColor="#4a4a4a"/>
+                                <Label Text="{Binding email}" TextColor="#4a4a4a"/>
+                                <Label Text="{Binding ContactNo}" TextColor="#4a4a4a"/>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="10">
+
+                                    <Button Text="Edit" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}" 
+                                            CommandParameter="{Binding .}" 
+                                            BackgroundColor="#4caf50"
+                                            TextColor="White"
+                                            WidthRequest="80"
+                                            CornerRadius="10"
+                                            Padding="10,5"/>
+
+                                    <Button Text="Delete" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}" 
+                                            CommandParameter="{Binding .}" 
+                                            BackgroundColor="#e57373"
+                                            TextColor="White"
+                                            WidthRequest="80"
+                                            CornerRadius="10"
+                                            Padding="10,5"/>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <Button Text="Load Data" Command="{Binding LoadDataCommand}" 
-                BackgroundColor="#4caf50" TextColor="White" />
+            <Button Text="Load Data" Command="{Binding LoadDataCommand}" 
+                    BackgroundColor="#4caf50" TextColor="White" />
 
-        <Label x:Name="ConnectionStatusLabel" 
-               Text="{Binding StatusMessage}"
-               FontSize="18"
-               HorizontalOptions="Center"
-               TextColor="#2e7d32" />
-    </VerticalStackLayout>
+            <Label x:Name="ConnectionStatusLabel" 
+                   Text="{Binding StatusMessage}"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   TextColor="#2e7d32" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
