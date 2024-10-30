@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Mod7Exer1.Model;
+using System.Security.Cryptography;
 
 namespace Mod7Exer1.Services
 {
@@ -45,6 +46,49 @@ namespace Mod7Exer1.Services
                     }
                 }
                 return employeeService;
+            }
+        }
+        public async Task<bool> AddEmployeeAsync(Employee newEmployee)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connectionString))
+                {
+                    await conn.OpenAsync();
+                    var cmd = new MySqlCommand("INSERT INTO tblemployee (Name, Address, email, ContactNo) VALUES (@Name, @Address, @email, @ContactNo)", conn);
+                    cmd.Parameters.AddWithValue("@Name", newEmployee.Name);
+                    cmd.Parameters.AddWithValue("@Address", newEmployee.Address);
+                    cmd.Parameters.AddWithValue("@Email", newEmployee.email);
+                    cmd.Parameters.AddWithValue("@ContactNo", newEmployee.ContactNo);
+
+                    var result = await cmd.ExecuteNonQueryAsync();
+                    return result > 0; // Returns true if an employee was added
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding employee record: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteEmployeeAsync(int EmployeeID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connectionString))
+                {
+                    await conn.OpenAsync();
+                    var cmd = new MySqlCommand("Delete FROM tblemployee WHERE EmployeeID = @EmployeeID", conn);
+                    cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+
+                    var result = await cmd.ExecuteNonQueryAsync();
+                    return result > 0;
+                }
+            }catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting employee record: {ex.Message}");
+                return false;
             }
         }
     }
